@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
@@ -59,13 +60,6 @@ public class UserPrefs {
     public void setMakerManagerAdminsFilePath(Path makerManagerAdminsFilePath) {
         this.makerManagerAdminsFilePath = makerManagerAdminsFilePath;
     }
-    public Path getMakerManagerJobsFilePath() {
-        return makerManagerJobsFilePath;
-    }
-    public void setMakerManagerJobsFilePath(Path makerManagerJobsFilePath) {
-        this.makerManagerJobsFilePath = makerManagerJobsFilePath;
-    }
-
 
     // ================================ others =========================================== //
 

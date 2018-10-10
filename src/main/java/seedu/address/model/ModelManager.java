@@ -17,6 +17,7 @@ import seedu.address.commons.events.model.AdminListChangedEvent;
 import seedu.address.commons.events.model.JobListChangedEvent;
 import seedu.address.commons.events.model.MachineListChangedEvent;
 import seedu.address.model.admin.Admin;
+import seedu.address.model.admin.Password;
 import seedu.address.model.admin.Username;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobName;
@@ -167,12 +168,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateMachineListChanged();
     }
 
-    @Override
-    public void addJob(Job job) {
-        versionedAddressBook.addJob(job);
-        updateFilteredJobList(PREDICATE_SHOW_ALL_JOBS);
-        indicateAddressBookChanged();
-    }
 
     @Override
     public void deleteJob(Job toRemove) {
@@ -180,12 +175,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    @Override
-    public void updateJob(Job target, Job editedJob) {
-        requireAllNonNull(target, editedJob);
-        versionedAddressBook.updateJob(target, editedJob);
-        indicateAddressBookChanged();
-    }
 
     @Override
     public boolean hasJob(Job job) {
@@ -263,6 +252,21 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Admin> getFilteredAdminList() {
+        return FXCollections.unmodifiableObservableList(filteredAdmins);
+    }
+
+    @Override
+    public void updateFilteredAdminList(Predicate<Admin> predicate) {
+        requireNonNull(predicate);
+        filteredAdmins.setPredicate(predicate);
     }
 
     //=========== Filtered Machine List Accessors ============================================================

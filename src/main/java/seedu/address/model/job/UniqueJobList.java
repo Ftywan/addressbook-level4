@@ -113,17 +113,4 @@ public class UniqueJobList {
         internalList.setAll(jobs);
     }
 
-    /**
-     * Returns true if {@code jobs} contains only unique jobs
-     */
-    private boolean jobsAreUnique(List<Job> jobs) {
-        for (int i = 0; i < jobs.size() - 1; i++) {
-            for (int j = i + 1; j < jobs.size(); j++) {
-                if (jobs.get(i).isSameJob(jobs.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 }

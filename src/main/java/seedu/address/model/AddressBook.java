@@ -62,6 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
     }
+
     /**
      * Replaces the contents of the machine list with {@code machines}.
      * {@code machines} must not contain duplicate machines
@@ -69,6 +70,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setMachines(List<Machine> machines) {
         this.machines.setMachines(machines);
     }
+
     /**
      * Replaces the contents of the admin list with {@code admins}.
      * {@code admins} must not contain duplicate admins
@@ -76,6 +78,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setAdmins(List<Admin> admins) {
         this.admins.setAdmins(admins);
     }
+
     /**
      * Replaces the contents of the jobs list with {@code jobs}.
      * {@code jobs} must not contain duplicate jobs
@@ -139,6 +142,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Person p) {
         persons.add(p);
     }
+
     /**
      * Adds an admin to the address book.
      * The admin must not already exist in the address book.
@@ -146,6 +150,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addAdmin(Admin toAdd) {
         admins.add(toAdd);
     }
+
+    /**
+     * Adds an admin from Files to Model
+     * The admin must not already exist in the address book.
+     */
+    public void addAdminWithoutRehash(Admin toAdd) {
+        admins.add(toAdd);
+    }
+
 
     /**
      * Adds a machine if {@code machine} does not exist in the list
@@ -195,19 +208,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
-      
-    public void addAdmin(Admin toAdd) {
-        admins.add(encryptedAdmin(toAdd));
     }
-
-    /**
-     * Adds an admin from Files to Model
-     * The admin must not already exist in the address book.
-     */
-    public void addAdminWithoutRehash(Admin toAdd) {
-        admins.add(toAdd);
-    }
-
 
     /**
      * Removes an admin from the address book.
@@ -240,19 +241,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Admin> getAdminList() {
         return admins.asUnmodifiableObservableList();
-      
-    public boolean hasAdmin(Admin admin) {
-        return admins.contains(admin);
     }
-      
-    public Admin findAdmin(Username username) {
-        return admins.findAdmin(username);
+
+    @Override
+    public ObservableList<Job> getJobList() {
+        return jobs.asUnmodifiableObservableList();
     }
-      
-    public int numAdmins() {
-        return admins.size();
+
+    @Override
+    public ObservableList<Machine> getMachineList() {
+        return machines.asUnmodifiableObservableList();
     }
-      
+
     /**
      * Returns Admin with password hashed
      * @param rawAdmin
@@ -264,74 +264,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         return protectedAdmin;
     }
 
-
-    @Override
-    public ObservableList<Machine> getMachineList() {
-        return machines.asUnmodifiableObservableList();
-
-  
-    //======================== machine methods ================================//
-
-    /**
-     * Returns true if a machine that matches the {@code machine}
-     */
-    public boolean hasMachine(Machine machine) {
-        requireNonNull(machine);
-        return machines.contains(machine);
-    }
-    /**
-     * Adds a machine if {@code machine} does not exist in the list
-     */
-    public void addMachine(Machine machine) {
-        requireNonNull(machine);
-        machines.add(machine);
-
-    }
-    /**
-     * Removes a machine if {@code toRemove} exists in the list
-     */
-    public void removeMachine(Machine toRemove) {
-        requireNonNull(toRemove);
-        machines.remove(toRemove);
-    }
-
-    //======================== job methods ================================//
-
-    /**
-     * Adds a job if {@code job} does not exist in the list
-     */
-    public void addJob(Job job) {
-        requireNonNull(job);
-
-        jobs.add(job);
-    }
-    /**
-     * Removes a job if {@code job} does not exist in the list
-     */
-    public void removeJob(Job job) {
-        requireNonNull(job);
-        jobs.remove(job);
-    }
     /**
      * Returns the job, if present, according to JobName
      */
     public Job findJob(JobName name) {
         return jobs.findJob(name);
     }
-    /**
-     * Updates the job
-     */
-    public void updateJob(Job oldJob, Job updatedJob) {
-        jobs.updateJob(oldJob, updatedJob);
-    }
-
 
     //======================== get lists methods ===========================//
-    @Override
-    public ObservableList<Job> getJobList() {
-        return jobs.asUnmodifiableObservableList();
-    }
-
     public Admin findAdmin(Username username) {
         return admins.findAdmin(username);
     }
@@ -345,17 +285,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList().size() + " persons";
         // TODO: refine later
     }
-
-    @Override
-    public ObservableList<Job> getJobList() {
-        return jobs.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Machine> getMachineList() {
-        return machines.asUnmodifiableObservableList();
-    }
-
 
     //======================== others ================================//
     @Override
