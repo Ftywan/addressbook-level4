@@ -128,10 +128,6 @@ public class AddressBookTest {
             return machines;
         }
 
-        @Override
-        public ObservableList<Job> getJobList() {
-            return jobs;
-        }
     }
 
 }
