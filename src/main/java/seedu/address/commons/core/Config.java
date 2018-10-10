@@ -15,7 +15,7 @@ public class Config {
     //TODO: Load Admins
 
     // Config values customizable through config file
-    private String appTitle = "MakerManager";
+    private String appTitle = "Address App";
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
 
