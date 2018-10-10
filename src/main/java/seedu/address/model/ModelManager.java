@@ -54,6 +54,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredMachines = new FilteredList<>(versionedAddressBook.getMachineList());
         filteredJobs = new FilteredList<>(versionedAddressBook.getJobList());
+        filteredAdmins = new FilteredList<>(versionedAddressBook.getAdminList());
 
         //TODO: Move this to a proper place later
         Username theFirstUn = new Username("admin");
