@@ -70,7 +70,7 @@ public class UniqueJobList {
 
         internalList.setAll(jobs);
     }
-    
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
