@@ -30,7 +30,7 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of jobs */
     ObservableList<Job> getFilteredJobList();
-  
+
     /** Returns an unmodifiable vie wof the filtered list of admins */
     ObservableList<Admin> getFilteredAdminList();
 

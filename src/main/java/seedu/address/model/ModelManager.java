@@ -306,7 +306,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
     }
-  
+
     //=========== Undo/Redo =================================================================================
 
     @Override
