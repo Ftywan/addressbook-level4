@@ -62,7 +62,15 @@ public class UniqueJobList {
         internalList.setAll(jobs);
     }
 
+    public void setJobs(ObservableList<Job> jobs) {
+        requireNonNull(jobs);
+        if (!jobsAreUnique(jobs)) {
+            throw new DuplicateMachineException();
+        }
 
+        internalList.setAll(jobs);
+    }
+    
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
@@ -102,15 +110,6 @@ public class UniqueJobList {
             }
         }
         return null;
-    }
-
-    public void setJobs(ObservableList<Job> jobs) {
-        requireNonNull(jobs);
-        if (!jobsAreUnique(jobs)) {
-            throw new DuplicateMachineException();
-        }
-
-        internalList.setAll(jobs);
     }
 
 }
