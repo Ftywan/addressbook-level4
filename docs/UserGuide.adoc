@@ -60,10 +60,18 @@ Give the user guidance as to what (s)he can do with makerManager +
 .. *Adding a print Job:*
 Adds a print job to the machine's queue. +
 
-    Format: addJob n/JOB NAME m/MACHINE NAME on/JOB OWNER NAME pr/JOB PRIORITY d/JOB DURATION jn/JOB NOTE [t/TAG]
+    Format: addJob n/JOBNAME m/MACHINENAME on/JOBOWNERNAME pr/JOBPRIORITY d/JOBDURATION jn/JOBNOTE [t/TAG]...
 
     Examples:
     addJob n/iDCP m/TYPrinter on/TIAN YUAN pr/HIGH d/1.5 jn/This is for the iDCP project t/iDCP
+
+.. *Finding a print Job:*
+Finds all jobs whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers. +
+
+    Format: findJob JOBNAME [JOBNAME]...
+
+    Examples:
+    findJob alice bob charlie
 
 .. *Starting a print Job:*
 Starts an existing print job in the queue. +
@@ -101,7 +109,7 @@ deletes an existing print in the queue. +
 .. *Requests a print job to be deleted by admin:*
 Tags a print job with a "requestDeletion" tag that is to be removed by admin
 
-    Format: requestDeletion n/JOB NAME
+    Format: requestDeletion n/JOBNAME
 
     Examples:
     requestDeletion n/iDCP
@@ -109,7 +117,7 @@ Tags a print job with a "requestDeletion" tag that is to be removed by admin
 .. *`[WIP][DISABLED]` Listing Prints:*
 Lists prints with optional filters. Currently lists persons. +
 
-    Format: list [n/PRINT_NAME] [m/MACHINE_NAME] [s/SPECIAL_NOTES] [p/PRIORITY]
+    Format: listJob [n/PRINT_NAME] [m/MACHINE_NAME] [s/SPECIAL_NOTES] [p/PRIORITY]
 
     Examples:
     list n/myprint m/printer_1 s/red filament only p/1 +
@@ -128,7 +136,7 @@ Lists all completed prints with optional filters. +
 .. *`[WIP][DISABLED]` Editing a Print:*
 Edits an existing print in the queue. +
 
-    Format: edit INDEX [n/PRINT_NAME] [m/MACHINE_NAME] [s/SPECIAL_NOTES] <p/PRIORITY>
+    Format: editJob INDEX [n/PRINT_NAME] [m/MACHINE_NAME] [s/SPECIAL_NOTES] <p/PRIORITY>
 
     Examples:
     edit 1 n/myprint m/printer_1 s/red filament only p/1 +
@@ -191,8 +199,7 @@ Updating your own account's password. Note that NEW_PW has to match some specifi
 ... *Add Machine:*
 Adds a new machine. All machine names must be unique. Status can only be either “ENABLED” or “DISABLED”. +
 
-    Format:
-    addMachine n/MACHINE_NAME ms/STATUS
+    Format: addMachine n/MACHINE_NAME ms/STATUS
 
     Example:
     addMachine n/my_machine ms/ENABLED
@@ -219,21 +226,27 @@ Edits an existing machine. All machine names must be unique. Status can only be 
 *A: *Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous makerManagerfolder.
 
 == Command Summary
+... *Normal Commands:*
 . help
-. addJob n/PRINT_NAME m/MACHINE_NAME d/PRINT_DURATION [s/SPECIAL_NOTES] <p/PRIORITY>
-. `[WIP][DISABLED]` list [n/PRINT_NAME] [m/MACHINE_NAME] [s/SPECIAL_NOTES] [p/PRIORITY]
-. `[WIP][DISABLED]` list_history [n/PRINT_NAME] [m/MACHINE_NAME] [s/SPECIAL_NOTES] [p/PRIORITY]
+. findJob JOBNAME [JOBNAME]...
+. manageJob JOBNAME start
+. manageJob JOBNAME cancel
+. manageJob JOBNAME restart
+. manageJob JOBNAME delete
+. requestDeletion n/JOBNAME
+. listJob [n/PRINT_NAME] [m/MACHINE_NAME] [s/SPECIAL_NOTES] [p/PRIORITY]
+. list_history [n/PRINT_NAME] [m/MACHINE_NAME] [s/SPECIAL_NOTES] [p/PRIORITY]
+. editJob INDEX [n/PRINT_NAME] [m/MACHINE_NAME] [s/SPECIAL_NOTES] <p/PRIORITY>
+. listMachines
+. findMachines [machine name] [machine name 2]
 . exit
+
+... *Admin Commands:"*
 . login ADMIN_ID PASSWORD
 . logout
 . addAdmin USERNAME PASSWORD VERIFY_PASSWORD
 . removeAdmin USERNAME
 . updatePassword USERNAME OLD_PW NEW_PW NEW_PW_VERIFY
-. add_machine n/MACHINE_NAME s/STATUS
-. `[WIP][DISABLED]` remove_machine MACHINE_NAME
-. edit_machine MACHINE_NAME [n/MACHINE_NAME] [s/STATUS]
-. manageJob JOB_NAME start
-. manageJob JOB_NAME cancel
-. manageJob JOB_NAME restart
-. `[WIP][DISABLED]` manageJob JOB_NAME delete
-. requestDeletion n/iDCP
+. addMachine n/MACHINE_NAME ms/STATUS
+. removeMachine MACHINE_NAME
+. editMachine MACHINE_NAME [n/MACHINE_NAME] [s/STATUS]

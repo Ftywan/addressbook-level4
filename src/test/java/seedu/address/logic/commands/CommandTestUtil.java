@@ -7,6 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.job.Priority.NORMAL;
+import static seedu.address.model.job.Priority.URGENT;
+import static seedu.address.model.job.Status.CANCELLED;
+import static seedu.address.model.job.Status.ONGOING;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +21,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.job.Priority;
+import seedu.address.model.job.Status;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -36,6 +42,32 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    //--------------------------Valid Job Configuration String Parameters------------------------
+    public static final String VALID_JOBNAME_PROONE = "proone";
+    public static final String VALID_JOBNAME_PROTWO = "protwo";
+    public static final String VALID_JOBOWNER_AMY = "Amy";
+    public static final String VALID_JOBOWNER_BOB = "Bob";
+    public static final String VALID_JOBMACHINE_PTONE = "ptone";
+    public static final String VALID_JOBMACHINE_PTTWO = "pttwo";
+    //TODO: added time should be added in the future
+    public static final String VALID_TAG_CSMODULE = "csmoudule";
+    public static final String VALID_TAG_CEGMODULE = "cegmodule";
+    public static final Priority VALID_JOBPRIORITY_URGENT = URGENT;
+    public static final Priority VALID_JOBPRIORITY_NORMAL = NORMAL;
+    public static final String VALID_JOBDURATION_FIVE = "5";
+    public static final String VALID_JOBDURATION_TEN = "10";
+    public static final String VALID_JOBNOTE_IDCP = "This job is meant for the iDCP project";
+    public static final String VALID_JOBNOTE_ANOTHERIDCP = "This job is really meant for the iDCP project";
+    public static final Status VALID_JOBSTATUS_CANCELLED = CANCELLED;
+    public static final Status VALID_JOBSTATUS_ONGOING = ONGOING;
+    public static final String VALID_JOBADDEDTIME_SOMEDAY = "sample day";
+    public static final String VALID_JOBADDEDTIME_SOMETIME = "3/10 13:19:20";
+
+
+
+
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

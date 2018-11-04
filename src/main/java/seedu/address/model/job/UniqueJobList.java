@@ -55,10 +55,14 @@ public class UniqueJobList {
         }
     }
 
+    /**
+     * Replaces the current job list with another joblist
+     */
     public void setJobs(UniqueJobList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
+
 
     /**
      * Replaces the contents of this list with {@code jobs}.
@@ -74,9 +78,28 @@ public class UniqueJobList {
     }
 
     /**
+     * Replaces the job {@code target} in the list with {@code editedJob}.
+     * {@code target} must exist in the list.
+     * The job identity of {@code editedJob} must not be the same as another existing job in the list.
+     */
+    public void setJob(Job target, Job editedJob) {
+        requireAllNonNull(target, editedJob);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new JobNotFoundException();
+        }
+
+        if (!target.isSameJob(editedJob) && contains(editedJob)) {
+            throw new DuplicateJobException();
+        }
+
+        internalList.set(index, editedJob);
+    }
+
+    /**
      * Returns a job by name
      */
-
     public Job get(String jobName) {
         requireNonNull(jobName);
         logger.info("Jobs size : " + Integer.toString(internalList.size()));
@@ -104,7 +127,6 @@ public class UniqueJobList {
     /**
      * Returns a sorted list based on custom comparator
      */
-
     public ObservableList<Job> asUnmodifiableObservableSortedList() {
         FXCollections.sort(internalList, new JobComparator());
         return FXCollections.unmodifiableObservableList(internalList);
@@ -153,9 +175,9 @@ public class UniqueJobList {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedJob}.
+     * Replaces the job {@code target} in the list with {@code editedJob}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedJob} must not be the same as another existing person in the list.
+     * The job identity of {@code editedJob} must not be the same as another existing job in the list.
      */
     public void updateJob(Job target, Job editedJob) {
         requireAllNonNull(target, editedJob);

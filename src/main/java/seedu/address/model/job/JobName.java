@@ -13,7 +13,7 @@ public class JobName {
             "Job names should only contain alphanumeric characters and without spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String JOBNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}]*";
